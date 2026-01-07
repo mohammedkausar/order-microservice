@@ -26,5 +26,5 @@ jobs:
             --targets "Key=tag:Name, Values=app-server" \
             --document-name AWS-RunShellScript \
             --parameters commands='[
-            "bash /opt/order-service/deploy.sh"
+            "bash /opt/order-service/order-deploy.sh"
             ]'
