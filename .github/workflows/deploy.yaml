@@ -1,0 +1,30 @@
+name: Deploy Order-service
+
+on:
+  push:
+    branches:
+      - release
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::537327098948:role/github-actions-oidc-role
+          aws-region: ap-south-1
+
+      - name: Deploy via SSM
+        run: |
+          aws ssm send-command \
+            --targets "Key=tag:Name, Values=app-server" \
+            --document-name AWS-RunShellScript \
+            --parameters commands='[
+            "bash /opt/order-service/deploy.sh"
+            ]'
