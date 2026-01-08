@@ -25,3 +25,5 @@ htmlcov/
 # Build artifacts
 dist/
 build/
+
+.lesshst
