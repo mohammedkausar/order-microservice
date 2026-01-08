@@ -25,6 +25,7 @@ jobs:
           aws ssm send-command \
             --targets "Key=tag:Name, Values=app-server" \
             --document-name AWS-RunShellScript \
+            --comment Order-service \
             --parameters commands='[
             "bash /opt/deploy/order-deploy.sh"
             ]'
